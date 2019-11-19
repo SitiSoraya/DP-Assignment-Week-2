@@ -1,0 +1,44 @@
+---
+title: "Developing Data Products Week 2 Assignment"
+author: "SitiSoraya"
+date: "November 19, 2019"
+output:
+  ioslides_presentation: default
+  beamer_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## About the assignment
+
+This is an R Markdown presentation, that features a map created with Leaflet. Here is a map of Kuala Lumpur, capital city of Malaysia and its adjacent city is Petaling Jaya, Selangor state.
+
+## Decimal latitude and longitude coordinates
+
+- Decimal latitude and longitude coordinates for Kuala Lumpur: 3.1412, 101.68653
+- Decimal latitude and longitude coordinates for Petaling Jaya, Selangor: 3.1279, 101.59449
+
+## The output
+
+```{r}
+library(leaflet)
+my_map <- leaflet() %>%
+    addTiles() %>%
+    addMarkers(lat=3.1412, lng=101.68653, popup="Kuala Lumpur, Malaysia") %>%
+    addMarkers(lat=3.1279, lng=101.59449, popup="Petaling Jaya, Selangor")
+my_map
+```
+
+## The output (cont.)
+
+```{r}
+df <- data.frame(lat=runif(500, min=3.15, max = 3.25),
+                 lng=runif(500, min=101.69, max = 101.79))
+
+df %>%
+    leaflet() %>%
+    addTiles() %>%  
+    addMarkers(clusterOptions = markerClusterOptions())
+```
